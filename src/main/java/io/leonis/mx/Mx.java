@@ -4,27 +4,27 @@ import io.reactivex.functions.Function;
 import lombok.Value;
 
 public class Mx {
-  <I0, I1> MultiplexWithValue<I0, I1> muxFirst(
+  public static  <I0, I1> MultiplexWithValue<I0, I1> muxFirst(
       final I0 value,
       final Function<I0, I1> mux
   ) {
     return new MultiplexWithValue<>(value, mux);
   }
 
-  <I0, I1> MultiplexWithoutValue<I0, I1> first(final Function<I0, I1> mux) {
+  public static  <I0, I1> MultiplexWithoutValue<I0, I1> first(final Function<I0, I1> mux) {
     return new MultiplexWithoutValue<>(mux);
   }
 
-  <I> MultiplexWithValue<I, I> mux(final I value) {
+  public static <I> MultiplexWithValue<I, I> mux(final I value) {
     return new MultiplexWithValue<>(value, identity -> identity);
   }
 
-  <I> MultiplexWithoutValue<I, I> mux() {
+  public static <I> MultiplexWithoutValue<I, I> mux() {
     return new MultiplexWithoutValue<>(value -> value);
   }
 
   @Value
-  final class MultiplexWithValue<I0, I1> {
+  static final class MultiplexWithValue<I0, I1> {
     private final I0 value;
     private final Function<I0, I1> preComp;
 
@@ -106,7 +106,7 @@ public class Mx {
   }
 
   @Value
-  final class MultiplexWithoutValue<I0, I1> {
+  static final class MultiplexWithoutValue<I0, I1> {
     private final Function<I0, I1> preComp;
 
     public <M0> Multiplex1.WithoutValue<I0, I1, M0> expand(final Function<I1, M0> mux) {
