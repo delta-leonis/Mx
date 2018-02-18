@@ -31,6 +31,7 @@ public final class Multiplex6WithoutValue<I0, I1, N0, N1, N2, N3, N4, N5> {
   /**
    * @param value The value to operate on.
    * @param demux The combinator function.
+   * @param <O> The type of output object.
    * @return The result of passing the supplied value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
@@ -48,9 +49,9 @@ public final class Multiplex6WithoutValue<I0, I1, N0, N1, N2, N3, N4, N5> {
 
   /**
    * @param demux The combinator function.
+   * @param <O> The type of output object.
    * @return A {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
-   * @throws Exception Thrown by the precomposition function when normalization fails.
    */
   public <O> Function<I0, O> demux(final Function6<N0, N1, N2, N3, N4, N5, O> demux) {
     return value -> demux.apply(
@@ -68,11 +69,12 @@ public final class Multiplex6WithoutValue<I0, I1, N0, N1, N2, N3, N4, N5> {
    * @return A multiplexer to which the supplied lane has been added.
    */
   public <M0> Multiplex7WithoutValue<I0, I1, N0, N1, N2, N3, N4, N5, M0> expand(
-      final Function<I1, M0> mux) {
+      final Function<I1, M0> multiplex
+  ) {
     return new Multiplex7WithoutValue<>(this.preComp,
         this.firstMux, this.secondMux, this.thirdMux, this.fourthMux, this.fifthMux,
         this.sixthMux,
-        mux);
+        multiplex);
   }
 
   /**

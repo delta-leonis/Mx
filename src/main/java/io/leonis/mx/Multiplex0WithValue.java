@@ -328,7 +328,7 @@ public final class Multiplex0WithValue<I0, I1> {
    * @param <M3>      The type of the fourth object produced by the supplied multiplexer.
    * @param <M4>      The type of the fifth object produced by the supplied multiplexer.
    * @param <M5>      The type of the sixth object produced by the supplied multiplexer.
-   * @param <M7>      The type of the seventh object produced by the supplied multiplexer.
+   * @param <M6>      The type of the seventh object produced by the supplied multiplexer.
    * @return A primed multiplexer to which the lanes of the supplied multiplexer have been added.
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.

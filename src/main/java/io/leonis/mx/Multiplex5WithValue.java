@@ -29,6 +29,7 @@ public final class Multiplex5WithValue<I0, I1, N0, N1, N2, N3, N4> {
 
   /**
    * @param demux The combinator function.
+   * @param <O> The type of output object.
    * @return The result of passing the contained value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
