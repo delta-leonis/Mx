@@ -13,13 +13,13 @@ public class Multiplex5WithValue<J0, J1, N0, N1, N2, N3, N4> {
   private final Function<J1, N3> fourthMux;
   private final Function<J1, N4> fifthMux;
 
-  public <O> Function<J1, O> demux(final Function5<N0, N1, N2, N3, N4, O> demux) {
-    return value -> demux.apply(
-        this.firstMux.apply(value),
-        this.secondMux.apply(value),
-        this.thirdMux.apply(value),
-        this.fourthMux.apply(value),
-        this.fifthMux.apply(value));
+  public <O> O demux(final Function5<N0, N1, N2, N3, N4, O> demux) throws Exception {
+    return demux.apply(
+        this.firstMux.apply(this.preComp.apply(value)),
+        this.secondMux.apply(this.preComp.apply(value)),
+        this.thirdMux.apply(this.preComp.apply(value)),
+        this.fourthMux.apply(this.preComp.apply(value)),
+        this.fifthMux.apply(this.preComp.apply(value)));
   }
 
   public <M0> Multiplex6WithValue<J0, J1, N0, N1, N2, N3, N4, M0> expand(
