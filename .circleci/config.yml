@@ -37,7 +37,7 @@ jobs:
       - run: gradle test
 
       # store test results
-      - store_test_results
+      - store_test_results:
           path: build/test-results
       
       # compile javadoc 
