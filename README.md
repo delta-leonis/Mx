@@ -1,6 +1,8 @@
 # `Mx`
 > declarative object manipulation
 
+[![CircleCI](https://circleci.com/gh/delta-leonis/Mx.svg?style=svg)](https://circleci.com/gh/delta-leonis/Mx)
+
 `Mx` is a framework for declarative object manipulation. `Mx` does this by exposing an
 API with which to destructure functions into a composition of multiplexers and demultiplexers.
 More technically, given a `Function<A, B>`, `Mx` provides two methods, `expand` and `demux`,
