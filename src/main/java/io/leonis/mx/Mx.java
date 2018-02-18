@@ -1,7 +1,7 @@
 package io.leonis.mx;
 
 import io.reactivex.functions.Function;
-import lombok.Value;
+import lombok.*;
 
 public class Mx {
   public static <I0, I1> MultiplexWithValue<I0, I1> muxFirst(
@@ -23,8 +23,9 @@ public class Mx {
     return new MultiplexWithoutValue<>(value -> value);
   }
 
-  @Value
-  static final class MultiplexWithValue<I0, I1> {
+  @AllArgsConstructor
+  @Getter(AccessLevel.PACKAGE)
+  public static final class MultiplexWithValue<I0, I1> {
     private final I0 value;
     private final Function<I0, I1> preComp;
 
@@ -206,8 +207,9 @@ public class Mx {
     }
   }
 
-  @Value
-  static final class MultiplexWithoutValue<I0, I1> {
+  @AllArgsConstructor
+  @Getter(AccessLevel.PACKAGE)
+  public static final class MultiplexWithoutValue<I0, I1> {
     private final Function<I0, I1> preComp;
 
     public <M0> Multiplex1WithoutValue<I0, I1, M0> expand(final Function<I1, M0> multiplex) {

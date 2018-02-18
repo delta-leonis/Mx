@@ -1,9 +1,10 @@
 package io.leonis.mx;
 
 import io.reactivex.functions.Function;
-import lombok.Value;
+import lombok.*;
 
-@Value
+@AllArgsConstructor
+@Getter(AccessLevel.PACKAGE)
 public class Multiplex1WithValue<J0, J1, N0> {
   private final J0 value;
   private final Function<J0, J1> preComp;
