@@ -50,4 +50,3 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                .circleci/deploy-ghpages.sh
             fi
-
