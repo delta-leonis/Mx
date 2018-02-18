@@ -3,6 +3,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/28a03eed5fe74b33a8d4487b432ea227)](https://www.codacy.com/app/delta-leonis/Mx?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=delta-leonis/Mx&amp;utm_campaign=Badge_Grade)
 [![CircleCI](https://circleci.com/gh/delta-leonis/Mx.svg?style=shield)](https://circleci.com/gh/delta-leonis/Mx)
+[![codecov](https://codecov.io/gh/delta-leonis/Mx/branch/master/graph/badge.svg)](https://codecov.io/gh/delta-leonis/Mx)
 
 `Mx` is a framework for declarative object manipulation. `Mx` does this by exposing an
 API with which to destructure functions into a composition of multiplexers and demultiplexers.
