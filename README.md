@@ -113,7 +113,21 @@ Mx.mux(inputSchool)
 
 ## Dependency
 
-`Mx` is not yet available through maven or gradle.
+#### Maven
+
+```
+<dependency>
+    <groupId>io.leonis</groupId>
+    <artifactId>Mx</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
+#### Gradle
+
+```
+compile 'io.leonis:Mx:0.0.1'
+```
 
 ## Overview
 
