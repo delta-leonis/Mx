@@ -3,7 +3,7 @@ package io.leonis.mx;
 import io.reactivex.functions.Function;
 import lombok.*;
 
-public class Mx {
+public final class Mx {
   public static <I0, I1> MultiplexWithValue<I0, I1> muxFirst(
       final I0 value,
       final Function<I0, I1> mux

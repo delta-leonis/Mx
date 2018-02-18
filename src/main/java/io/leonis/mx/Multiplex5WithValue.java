@@ -5,7 +5,7 @@ import lombok.*;
 
 @AllArgsConstructor
 @Getter(AccessLevel.PACKAGE)
-public class Multiplex5WithValue<J0, J1, N0, N1, N2, N3, N4> {
+public final class Multiplex5WithValue<J0, J1, N0, N1, N2, N3, N4> {
   private final J0 value;
   private final Function<J0, J1> preComp;
   private final Function<J1, N0> firstMux;
