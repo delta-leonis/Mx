@@ -1,35 +1,39 @@
 package io.leonis.mx;
 
-import io.leonis.Function7;
-import java.util.function.Function;
+import io.reactivex.functions.*;
 import lombok.Value;
-import lombok.experimental.NonFinal;
 
-@Value
-@NonFinal
-public class Multiplex7<Y, I, M1, M2, M3, M4, M5, M6, M7> {
-  protected final Function<Y, I> preComp;
-  protected final Function<I, M1> firstMux;
-  protected final Function<I, M2> secondMux;
-  protected final Function<I, M3> thirdMux;
-  protected final Function<I, M4> fourthMux;
-  protected final Function<I, M5> fifthMux;
-  protected final Function<I, M6> sixthMux;
-  protected final Function<I, M7> seventhMux;
+public interface Multiplex7<I0, I1, M1, M2, M3, M4, M5, M6, M7> {
+  Function<I0, I1> getPreComp();
 
-  public static class WithoutValue<WY, WI, WM1, WM2, WM3, WM4, WM5, WM6, WM7>
-      extends Multiplex7<WY, WI, WM1, WM2, WM3, WM4, WM5, WM6, WM7> {
+  Function<I1, M1> getFirstMux();
 
-    public WithoutValue(final Function<WY, WI> preComp, final Function<WI, WM1> firstMux,
-        final Function<WI, WM2> secondMux,
-        final Function<WI, WM3> thirdMux, final Function<WI, WM4> fourthMux,
-        final Function<WI, WM5> fifthMux, final Function<WI, WM6> sixthMux,
-        final Function<WI, WM7> seventhMux) {
-      super(preComp, firstMux, secondMux, thirdMux, fourthMux, fifthMux, sixthMux, seventhMux);
-    }
+  Function<I1, M2> getSecondMux();
 
-    public <O> O demux(final WY value,
-        final Function7<WM1, WM2, WM3, WM4, WM5, WM6, WM7, O> demux) {
+  Function<I1, M3> getThirdMux();
+
+  Function<I1, M4> getFourthMux();
+
+  Function<I1, M5> getFifthMux();
+
+  Function<I1, M6> getSixthMux();
+
+  Function<I1, M7> getSeventhMux();
+
+  @Value
+  class WithoutValue<J0, J1, N0, N1, N2, N3, N4, N5, N6>
+      implements Multiplex7<J0, J1, N0, N1, N2, N3, N4, N5, N6> {
+    private final Function<J0, J1> preComp;
+    private final Function<J1, N0> firstMux;
+    private final Function<J1, N1> secondMux;
+    private final Function<J1, N2> thirdMux;
+    private final Function<J1, N3> fourthMux;
+    private final Function<J1, N4> fifthMux;
+    private final Function<J1, N5> sixthMux;
+    private final Function<J1, N6> seventhMux;
+
+    public <O> O demux(final J0 value,
+        final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux) throws Exception {
       return demux.apply(
           this.firstMux.apply(this.preComp.apply(value)),
           this.secondMux.apply(this.preComp.apply(value)),
@@ -40,7 +44,7 @@ public class Multiplex7<Y, I, M1, M2, M3, M4, M5, M6, M7> {
           this.seventhMux.apply(this.preComp.apply(value)));
     }
 
-    public <O> Function<WY, O> demux(final Function7<WM1, WM2, WM3, WM4, WM5, WM6, WM7, O> demux) {
+    public <O> Function<J0, O> demux(final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux) {
       return value -> demux.apply(
           this.firstMux.apply(this.preComp.apply(value)),
           this.secondMux.apply(this.preComp.apply(value)),
@@ -52,21 +56,21 @@ public class Multiplex7<Y, I, M1, M2, M3, M4, M5, M6, M7> {
     }
   }
 
-  public static class WithValue<WY, WI, WM1, WM2, WM3, WM4, WM5, WM6, WM7>
-      extends Multiplex7<WY, WI, WM1, WM2, WM3, WM4, WM5, WM6, WM7> {
-    private final WY value;
+  @Value
+  class WithValue<J0, J1, N0, N1, N2, N3, N4, N5, N6>
+      implements Multiplex7<J0, J1, N0, N1, N2, N3, N4, N5, N6> {
+    private final J0 value;
+    private final Function<J0, J1> preComp;
+    private final Function<J1, N0> firstMux;
+    private final Function<J1, N1> secondMux;
+    private final Function<J1, N2> thirdMux;
+    private final Function<J1, N3> fourthMux;
+    private final Function<J1, N4> fifthMux;
+    private final Function<J1, N5> sixthMux;
+    private final Function<J1, N6> seventhMux;
 
-    public WithValue(final WY value, final Function<WY, WI> preComp,
-        final Function<WI, WM1> firstMux,
-        final Function<WI, WM2> secondMux,
-        final Function<WI, WM3> thirdMux, final Function<WI, WM4> fourthMux,
-        final Function<WI, WM5> fifthMux, final Function<WI, WM6> sixthMux,
-        final Function<WI, WM7> seventhMux) {
-      super(preComp, firstMux, secondMux, thirdMux, fourthMux, fifthMux, sixthMux, seventhMux);
-      this.value = value;
-    }
-
-    public <O> O demux(final Function7<WM1, WM2, WM3, WM4, WM5, WM6, WM7, O> demux) {
+    public <O> O demux(final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux)
+        throws Exception {
       return demux.apply(
           this.firstMux.apply(this.preComp.apply(this.value)),
           this.secondMux.apply(this.preComp.apply(this.value)),

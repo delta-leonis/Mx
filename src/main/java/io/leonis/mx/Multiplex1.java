@@ -1,123 +1,169 @@
 package io.leonis.mx;
 
-import java.util.function.Function;
+import io.reactivex.functions.Function;
 import lombok.Value;
-import lombok.experimental.NonFinal;
 
-@Value
-@NonFinal
-public class Multiplex1<Y, I, M0> {
-  protected final Function<Y, I> preComp;
-  protected final Function<I, M0> mux;
+public interface Multiplex1<I0, I1, M0> {
+  Function<I0, I1> getPreComp();
 
-  public static class WithoutValue<WY, WI, WM0> extends Multiplex1<WY, WI, WM0> {
-    public WithoutValue(final Function<WY, WI> preComp, final Function<WI, WM0> mux) {
-      super(preComp, mux);
-    }
+  Function<I1, M0> getMux();
 
-    public WM0 demux(final WY value) {
+  @Value
+  class WithoutValue<J0, J1, N0> implements Multiplex1<J0, J1, N0> {
+    private final Function<J0, J1> preComp;
+    private final Function<J1, N0> mux;
+
+    public N0 demux(final J0 value) throws Exception {
       return this.mux.apply(this.preComp.apply(value));
     }
 
-    public Function<WY, WM0> demux() {
-      return this.preComp.andThen(this.mux);
+    public Function<J0, N0> demux() {
+      return value -> this.mux.apply(this.preComp.apply(value));
     }
 
-    public <M1> Multiplex2.WithoutValue<WY, WI, WM0, M1> expand(final Function<WI, M1> mux) {
+    public <M0> Multiplex2.WithoutValue<J0, J1, N0, M0> expand(final Function<J1, M0> mux) {
       return new Multiplex2.WithoutValue<>(this.preComp, this.mux, mux);
     }
 
-    public <M5, M6> Multiplex3.WithoutValue<WY, WI, WM0, M5, M6> expand(
-        final Multiplex2<WY, WI, M5, M6> multiplex
+    public <K0, M0> Multiplex2.WithoutValue<J1, J1, N0, M0> expand(
+        final Multiplex1<J1, K0, M0> multiplex
     ) {
-      return new Multiplex3.WithoutValue<>(this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux());
+      return new Multiplex2.WithoutValue<>(value -> value,
+          this.mux,
+          value -> multiplex.getMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7> Multiplex4.WithoutValue<WY, WI, WM0, M5, M6, M7> expand(
-        final Multiplex3<WY, WI, M5, M6, M7> multiplex
+    public <K0, M0, M1> Multiplex3.WithoutValue<J1, J1, N0, M0, M1> expand(
+        final Multiplex2<J1, K0, M0, M1> multiplex
     ) {
-      return new Multiplex4.WithoutValue<>(this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux());
+      return new Multiplex3.WithoutValue<>(value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7, M8> Multiplex5.WithoutValue<WY, WI, WM0, M5, M6, M7, M8> expand(
-        final Multiplex4<WY, WI, M5, M6, M7, M8> multiplex
+    public <K0, M0, M1, M2> Multiplex4.WithoutValue<J1, J1, N0, M0, M1, M2> expand(
+        final Multiplex3<J1, K0, M0, M1, M2> multiplex
     ) {
-      return new Multiplex5.WithoutValue<>(this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux(),
-          multiplex.getFourthMux());
+      return new Multiplex4.WithoutValue<>(value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7, M8, M9> Multiplex6.WithoutValue<WY, WI, WM0, M5, M6, M7, M8, M9> expand(
-        final Multiplex5<WY, WI, M5, M6, M7, M8, M9> multiplex
+    public <K0, M0, M1, M2, M3> Multiplex5.WithoutValue<J1, J1, N0, M0, M1, M2, M3> expand(
+        final Multiplex4<J1, K0, M0, M1, M2, M3> multiplex
     ) {
-      return new Multiplex6.WithoutValue<>(this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux(),
-          multiplex.getFourthMux(), multiplex.getFifthMux());
+      return new Multiplex5.WithoutValue<>(value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFourthMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7, M8, M9, M10> Multiplex7.WithoutValue<WY, WI, WM0, M5, M6, M7, M8, M9, M10> expand(
-        final Multiplex6<WY, WI, M5, M6, M7, M8, M9, M10> multiplex
+    public <K0, M0, M1, M2, M3, M4> Multiplex6.WithoutValue<J1, J1, N0, M0, M1, M2, M3, M4> expand(
+        final Multiplex5<J1, K0, M0, M1, M2, M3, M4> multiplex
     ) {
-      return new Multiplex7.WithoutValue<>(this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux(),
-          multiplex.getFourthMux(), multiplex.getFifthMux(), multiplex.getSixthMux());
+      return new Multiplex6.WithoutValue<>(value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFourthMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFifthMux().apply(multiplex.getPreComp().apply(value)));
+    }
+
+    public <K0, M0, M1, M2, M3, M4, M5> Multiplex7.WithoutValue<J1, J1, N0, M0, M1, M2, M3, M4, M5> expand(
+        final Multiplex6<J1, K0, M0, M1, M2, M3, M4, M5> multiplex
+    ) {
+      return new Multiplex7.WithoutValue<>(value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFourthMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFifthMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSixthMux().apply(multiplex.getPreComp().apply(value)));
     }
   }
 
-  public static class WithValue<WY, WI, WM0> extends Multiplex1<WY, WI, WM0> {
-    private final WY value;
+  @Value
+  class WithValue<J0, J1, N0> implements Multiplex1<J0, J1, N0> {
+    private final J0 value;
+    private final Function<J0, J1> preComp;
+    private final Function<J1, N0> mux;
 
-    public WithValue(final WY value, final Function<WY, WI> preComp, final Function<WI, WM0> mux) {
-      super(preComp, mux);
-      this.value = value;
-    }
-
-    public WM0 demux() {
+    public N0 demux() throws Exception {
       return this.mux.apply(this.preComp.apply(this.value));
     }
 
-    public <M1> Multiplex2.WithValue<WY, WI, WM0, M1> expand(final Function<WI, M1> mux) {
+    public <M1> Multiplex2.WithValue<J0, J1, N0, M1> expand(final Function<J1, M1> mux) {
       return new Multiplex2.WithValue<>(this.value, this.preComp, this.mux, mux);
     }
 
-    public <M5, M6> Multiplex3.WithValue<WY, WI, WM0, M5, M6> expand(
-        final Multiplex2<WY, WI, M5, M6> multiplex
-    ) {
-      return new Multiplex3.WithValue<>(this.value, this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux());
+    public <K0, M0> Multiplex2.WithValue<J1, J1, N0, M0> expand(
+        final Multiplex1<J1, K0, M0> multiplex
+    ) throws Exception {
+      return new Multiplex2.WithValue<>(this.preComp.apply(this.value), value -> value,
+          this.mux,
+          value -> multiplex.getMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7> Multiplex4.WithValue<WY, WI, WM0, M5, M6, M7> expand(
-        final Multiplex3<WY, WI, M5, M6, M7> multiplex
-    ) {
-      return new Multiplex4.WithValue<>(this.value, this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux());
+    public <K0, M0, M1> Multiplex3.WithValue<J1, J1, N0, M0, M1> expand(
+        final Multiplex2<J1, K0, M0, M1> multiplex
+    ) throws Exception {
+      return new Multiplex3.WithValue<>(this.preComp.apply(this.value), value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7, M8> Multiplex5.WithValue<WY, WI, WM0, M5, M6, M7, M8> expand(
-        final Multiplex4<WY, WI, M5, M6, M7, M8> multiplex
-    ) {
-      return new Multiplex5.WithValue<>(this.value, this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux(),
-          multiplex.getFourthMux());
+    public <K0, M0, M1, M2> Multiplex4.WithValue<J1, J1, N0, M0, M1, M2> expand(
+        final Multiplex3<J1, K0, M0, M1, M2> multiplex
+    ) throws Exception {
+      return new Multiplex4.WithValue<>(this.preComp.apply(this.value), value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7, M8, M9> Multiplex6.WithValue<WY, WI, WM0, M5, M6, M7, M8, M9> expand(
-        final Multiplex5<WY, WI, M5, M6, M7, M8, M9> multiplex
-    ) {
-      return new Multiplex6.WithValue<>(this.value, this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux(),
-          multiplex.getFourthMux(), multiplex.getFifthMux());
+    public <K0, M0, M1, M2, M3> Multiplex5.WithValue<J1, J1, N0, M0, M1, M2, M3> expand(
+        final Multiplex4<J1, K0, M0, M1, M2, M3> multiplex
+    ) throws Exception {
+      return new Multiplex5.WithValue<>(this.preComp.apply(this.value), value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFourthMux().apply(multiplex.getPreComp().apply(value)));
     }
 
-    public <M5, M6, M7, M8, M9, M10> Multiplex7.WithValue<WY, WI, WM0, M5, M6, M7, M8, M9, M10> expand(
-        final Multiplex6<WY, WI, M5, M6, M7, M8, M9, M10> multiplex
-    ) {
-      return new Multiplex7.WithValue<>(this.value, this.preComp, this.mux,
-          multiplex.getFirstMux(), multiplex.getSecondMux(), multiplex.getThirdMux(),
-          multiplex.getFourthMux(), multiplex.getFifthMux(), multiplex.getSixthMux());
+    public <K0, M0, M1, M2, M3, M4> Multiplex6.WithValue<J1, J1, N0, M0, M1, M2, M3, M4> expand(
+        final Multiplex5<J1, K0, M0, M1, M2, M3, M4> multiplex
+    ) throws Exception {
+      return new Multiplex6.WithValue<>(this.preComp.apply(this.value), value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFourthMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFifthMux().apply(multiplex.getPreComp().apply(value)));
+    }
+
+    public <K0, M0, M1, M2, M3, M4, M5> Multiplex7.WithValue<J1, J1, N0, M0, M1, M2, M3, M4, M5> expand(
+        final Multiplex6<J1, K0, M0, M1, M2, M3, M4, M5> multiplex
+    ) throws Exception {
+      return new Multiplex7.WithValue<>(this.preComp.apply(this.value), value -> value,
+          this.mux,
+          value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFourthMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getFifthMux().apply(multiplex.getPreComp().apply(value)),
+          value -> multiplex.getSixthMux().apply(multiplex.getPreComp().apply(value)));
     }
   }
 }
