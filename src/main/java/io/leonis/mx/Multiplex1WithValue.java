@@ -20,7 +20,7 @@ public final class Multiplex1WithValue<I0, I1, N0> {
   private final Function<I1, N0> mux;
 
   /**
-   * @return The result of passing the contained value to the {@link Function) representing the
+   * @return The result of passing the contained value to the {@link Function} representing the
    * composition of multiplexers and demultiplexers.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */

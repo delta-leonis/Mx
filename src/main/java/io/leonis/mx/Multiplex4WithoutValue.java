@@ -27,7 +27,7 @@ public final class Multiplex4WithoutValue<I0, I1, N0, N1, N2, N3> {
   /**
    * @param value The value to operate on.
    * @param demux The combinator function.
-   * @return The result of passing the supplied value to the {@link Function) representing the
+   * @return The result of passing the supplied value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
@@ -42,7 +42,7 @@ public final class Multiplex4WithoutValue<I0, I1, N0, N1, N2, N3> {
 
   /**
    * @param demux The combinator function.
-   * @return A {@link Function) representing the
+   * @return A {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */

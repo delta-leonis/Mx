@@ -20,7 +20,7 @@ public final class Multiplex1WithoutValue<I0, I1, N0> {
 
   /**
    * @param value The value to operate on.
-   * @return The result of passing the supplied value to the {@link Function) representing the
+   * @return The result of passing the supplied value to the {@link Function} representing the
    * composition of multiplexers and demultiplexers.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
@@ -29,7 +29,7 @@ public final class Multiplex1WithoutValue<I0, I1, N0> {
   }
 
   /**
-   * @return A {@link Function) representing the composition of multiplexers and demultiplexers.
+   * @return A {@link Function} representing the composition of multiplexers and demultiplexers.
    */
   public Function<I0, N0> demux() {
     return value -> this.mux.apply(this.preComp.apply(value));
