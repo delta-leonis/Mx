@@ -1,6 +1,7 @@
 plugins {
     id 'io.franzbecker.gradle-lombok' version '1.11'
     id 'java'
+    id: 'jacoco'
     id 'signing'
     id 'maven'
 }
@@ -19,6 +20,13 @@ repositories {
 javadoc {
     source = sourceSets.main.allJava
     classpath = configurations.compile
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
 }
 
 dependencies {
