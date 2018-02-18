@@ -20,6 +20,13 @@ public class Multiplex4WithValue<J0, J1, N0, N1, N2, N3> {
         this.fourthMux.apply(this.preComp.apply(this.value)));
   }
 
+  public <M0> Multiplex5WithValue<J0, J1, N0, N1, N2, N3, M0> expand(
+      final Function<J1, M0> mux) {
+    return new Multiplex5WithValue<>(this.value, this.preComp,
+        this.firstMux, this.secondMux, this.thirdMux, this.fourthMux,
+        mux);
+  }
+
   public <K0, M0> Multiplex5WithValue<J1, J1, N0, N1, N2, N3, M0> expand(
       final Multiplex1WithoutValue<J1, K0, M0> multiplex
   ) throws Exception {
