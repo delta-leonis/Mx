@@ -23,7 +23,93 @@ The return type of `expand` is another multiplexer so that methods can be chaine
   
 ## Examples
 
-TODO
+Suppose we had the following deeply nested object structure (using lombok for brevity):
+
+```java
+  @Value
+  public class School {
+    private final String name;
+    private final Set<SchoolClass> classes;
+    
+    @Value
+    class SchoolClass {
+      private final String name;
+      private final Set<Student> students;
+    }
+    
+    @Value
+    class Student {
+      private final int number;
+      private final String name;
+      private final float gpa;
+    }
+  }
+```
+
+And the following functions:
+
+```java
+public class SchoolMetrics {
+  public static SchoolClass findBestClass(final Set<SchoolClass> schoolClass) { /* ... */ }
+  
+  public static SchoolClass findWorstClass(final Set<SchoolClass> schoolClass) { /* ... */ }
+  
+  public static Student findBestStudent(final Set<Student> students) { /* ... */ }
+  
+  public static StudentfindWorstStudent(final Set<Student> students) { /* ... */ }
+}
+```
+
+Now given a school, suppose we want to generate an overview of the best student in the best class
+and worst student in the worst class of the school, 
+including student name, GPA and name of the student's class:
+
+```java
+@Value
+class SchoolReport {
+  private final String schoolName;
+  private final String bestClassName;
+  private final String bestStudentName;
+  private final float  bestStudentGPA;
+  private final String worstClassName;
+  private final String worstStudentName;
+  private final float  worstStudentGPA;
+}
+
+``` 
+This could be implemented using `Mx` as follows:
+
+```java
+
+Mx.mux(inputSchool)
+  // the name of the school
+  .expand(School::getName)
+  .expand(
+      Mx.first(School::getClasses)
+        // the best student in the best class
+        .expand(
+            Mx.first(SchoolMetrics::findBestClass)
+                // the name of the best class
+                .expand(SchoolClass::getName)
+                .expand(
+                    Mx.first(SchoolMetrics::findBestStudent)
+                        // the name of the best student in the best class
+                        .expand(Student::getName)
+                        // the GPA of the best student in the best class
+                        .expand(Student::getGPA)))
+        // the worst student in the worst class
+        .expand(
+            Mx.first(SchoolMetrics::findWorstClass)
+                // the name of the worst class
+                .expand(SchoolClass::getName)
+                .expand(
+                    Mx.first(SchoolMetrics::findWorstStudent)
+                        // the name of the worst student in the worst class
+                        .expand(Student::getName)
+                        // the GPA of the worst student in the worst class
+                        .expand(Student::getGPA)))
+  .demux(SchoolReport::new);
+``` 
 
 ## Dependency
 
