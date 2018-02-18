@@ -43,6 +43,9 @@ jobs:
       # compile javadoc 
       - run: gradle javadoc
       
+      # Generate test report
+      - run:  gradle jacocoTestReport
+
       # update codecov
       - run: bash <(curl -s https://codecov.io/bash)
 
