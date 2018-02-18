@@ -36,7 +36,43 @@ public class Multiplex4WithoutValue<J0, J1, N0, N1, N2, N3> {
   }
 
   public <K0, M0> Multiplex5WithoutValue<J1, J1, N0, N1, N2, N3, M0> expand(
-      final Multiplex1<J1, K0, M0> multiplex
+      final Multiplex1WithValue<J1, K0, M0> multiplex
+  ) {
+    return new Multiplex5WithoutValue<>(value -> value,
+        this.firstMux,
+        this.secondMux,
+        this.thirdMux,
+        this.fourthMux,
+        value -> multiplex.getMux().apply(multiplex.getPreComp().apply(multiplex.getValue())));
+  }
+
+  public <K0, M0, M1> Multiplex6WithoutValue<J1, J1, N0, N1, N2, N3, M0, M1> expand(
+      final Multiplex2WithValue<J1, K0, M0, M1> multiplex
+  ) {
+    return new Multiplex6WithoutValue<>(value -> value,
+        this.firstMux,
+        this.secondMux,
+        this.thirdMux,
+        this.fourthMux,
+        value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(multiplex.getValue())),
+        value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(multiplex.getValue())));
+  }
+
+  public <K0, M0, M1, M2> Multiplex7WithoutValue<J1, J1, N0, N1, N2, N3, M0, M1, M2> expand(
+      final Multiplex3WithValue<J1, K0, M0, M1, M2> multiplex
+  ) {
+    return new Multiplex7WithoutValue<>(value -> value,
+        this.firstMux,
+        this.secondMux,
+        this.thirdMux,
+        this.fourthMux,
+        value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(multiplex.getValue())),
+        value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(multiplex.getValue())),
+        value -> multiplex.getThirdMux().apply(multiplex.getPreComp().apply(multiplex.getValue())));
+  }
+
+  public <K0, M0> Multiplex5WithoutValue<J1, J1, N0, N1, N2, N3, M0> expand(
+      final Multiplex1WithoutValue<J1, K0, M0> multiplex
   ) {
     return new Multiplex5WithoutValue<>(value -> value,
         this.firstMux,
@@ -47,7 +83,7 @@ public class Multiplex4WithoutValue<J0, J1, N0, N1, N2, N3> {
   }
 
   public <K0, M0, M1> Multiplex6WithoutValue<J1, J1, N0, N1, N2, N3, M0, M1> expand(
-      final Multiplex2<J1, K0, M0, M1> multiplex
+      final Multiplex2WithoutValue<J1, K0, M0, M1> multiplex
   ) {
     return new Multiplex6WithoutValue<>(value -> value,
         this.firstMux,
@@ -59,7 +95,7 @@ public class Multiplex4WithoutValue<J0, J1, N0, N1, N2, N3> {
   }
 
   public <K0, M0, M1, M2> Multiplex7WithoutValue<J1, J1, N0, N1, N2, N3, M0, M1, M2> expand(
-      final Multiplex3<J1, K0, M0, M1, M2> multiplex
+      final Multiplex3WithoutValue<J1, K0, M0, M1, M2> multiplex
   ) {
     return new Multiplex7WithoutValue<>(value -> value,
         this.firstMux,
