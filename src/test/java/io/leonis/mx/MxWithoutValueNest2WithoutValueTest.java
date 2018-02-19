@@ -100,7 +100,8 @@ public class MxWithoutValueNest2WithoutValueTest {
             .expand(Mx.<String>mux()
                 .expand(marker -> marker + "6")
                 .expand(marker -> marker + "7"))
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 
