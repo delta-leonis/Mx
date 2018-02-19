@@ -8,7 +8,7 @@ public class MxNest6WithValueTest {
   public void nest6mux1WithValue() throws Exception {
     Assert.assertEquals(
         Mx.mux("#")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "1")
                 .add(marker -> marker + "2")
                 .add(marker -> marker + "3")
@@ -25,7 +25,7 @@ public class MxNest6WithValueTest {
     Assert.assertEquals(
         Mx.mux("#")
             .add(marker -> marker + "1")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "2")
                 .add(marker -> marker + "3")
                 .add(marker -> marker + "4")

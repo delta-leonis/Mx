@@ -8,7 +8,7 @@ public class MxNest4WithValueTest {
   public void nest4mux3WithValue() throws Exception {
     Assert.assertEquals(
         Mx.mux("#")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "1")
                 .add(marker -> marker + "2")
                 .add(marker -> marker + "3")
@@ -25,7 +25,7 @@ public class MxNest4WithValueTest {
     Assert.assertEquals(
         Mx.mux("#")
             .add(marker -> marker + "1")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "2")
                 .add(marker -> marker + "3")
                 .add(marker -> marker + "4")
@@ -42,7 +42,7 @@ public class MxNest4WithValueTest {
         Mx.mux("#")
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "3")
                 .add(marker -> marker + "4")
                 .add(marker -> marker + "5")
@@ -59,7 +59,7 @@ public class MxNest4WithValueTest {
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "4")
                 .add(marker -> marker + "5")
                 .add(marker -> marker + "6")

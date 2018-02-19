@@ -8,7 +8,7 @@ public class MxNestWithValueTest {
   public void nest1mux6WithValue() throws Exception {
     Assert.assertEquals(
         Mx.mux("#")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "1"))
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
@@ -25,7 +25,7 @@ public class MxNestWithValueTest {
     Assert.assertEquals(
         Mx.mux("#")
             .add(marker -> marker + "1")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "2"))
             .add(marker -> marker + "3")
             .add(marker -> marker + "4")
@@ -42,7 +42,7 @@ public class MxNestWithValueTest {
         Mx.mux("#")
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "3"))
             .add(marker -> marker + "4")
             .add(marker -> marker + "5")
@@ -59,7 +59,7 @@ public class MxNestWithValueTest {
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "4"))
             .add(marker -> marker + "5")
             .add(marker -> marker + "6")
@@ -76,7 +76,7 @@ public class MxNestWithValueTest {
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
             .add(marker -> marker + "4")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "5"))
             .add(marker -> marker + "6")
             .add(marker -> marker + "7")
@@ -93,7 +93,7 @@ public class MxNestWithValueTest {
             .add(marker -> marker + "3")
             .add(marker -> marker + "4")
             .add(marker -> marker + "5")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "6"))
             .add(marker -> marker + "7")
             .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
@@ -110,7 +110,7 @@ public class MxNestWithValueTest {
             .add(marker -> marker + "4")
             .add(marker -> marker + "5")
             .add(marker -> marker + "6")
-            .expand(Mx.mux("@")
+            .join(Mx.mux("@")
                 .add(marker -> marker + "7"))
             .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
         "#1#2#3#4#5#6@7");

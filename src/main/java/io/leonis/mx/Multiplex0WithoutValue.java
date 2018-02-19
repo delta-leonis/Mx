@@ -33,7 +33,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.
    */
-  public <K0, M0> Multiplex1WithoutValue<I1, I1, M0> expand(
+  public <K0, M0> Multiplex1WithoutValue<I1, I1, M0> join(
       final Multiplex1WithValue<I1, K0, M0> multiplex
   ) {
     return new Multiplex1WithoutValue<>(
@@ -50,7 +50,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.
    */
-  public <K0, M0, M1> Multiplex2WithoutValue<I1, I1, M0, M1> expand(
+  public <K0, M0, M1> Multiplex2WithoutValue<I1, I1, M0, M1> join(
       final Multiplex2WithValue<I1, K0, M0, M1> multiplex
   ) {
     return new Multiplex2WithoutValue<>(value -> value,
@@ -70,7 +70,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.
    */
-  public <K0, M0, M1, M2> Multiplex3WithoutValue<I1, I1, M0, M1, M2> expand(
+  public <K0, M0, M1, M2> Multiplex3WithoutValue<I1, I1, M0, M1, M2> join(
       final Multiplex3WithValue<I1, K0, M0, M1, M2> multiplex
   ) {
     return new Multiplex3WithoutValue<>(value -> value,
@@ -93,7 +93,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.
    */
-  public <K0, M0, M1, M2, M3> Multiplex4WithoutValue<I1, I1, M0, M1, M2, M3> expand(
+  public <K0, M0, M1, M2, M3> Multiplex4WithoutValue<I1, I1, M0, M1, M2, M3> join(
       final Multiplex4WithValue<I1, K0, M0, M1, M2, M3> multiplex
   ) {
     return new Multiplex4WithoutValue<>(value -> value,
@@ -119,7 +119,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.
    */
-  public <K0, M0, M1, M2, M3, M4> Multiplex5WithoutValue<I1, I1, M0, M1, M2, M3, M4> expand(
+  public <K0, M0, M1, M2, M3, M4> Multiplex5WithoutValue<I1, I1, M0, M1, M2, M3, M4> join(
       final Multiplex5WithValue<I1, K0, M0, M1, M2, M3, M4> multiplex
   ) {
     return new Multiplex5WithoutValue<>(value -> value,
@@ -148,7 +148,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.
    */
-  public <K0, M0, M1, M2, M3, M4, M5> Multiplex6WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5> expand(
+  public <K0, M0, M1, M2, M3, M4, M5> Multiplex6WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5> join(
       final Multiplex6WithValue<I1, K0, M0, M1, M2, M3, M4, M5> multiplex
   ) {
     return new Multiplex6WithoutValue<>(value -> value,
@@ -180,7 +180,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * These lanes ignore outer input and operate on the value with which the supplied multiplexer
    * was primed.
    */
-  public <K0, M0, M1, M2, M3, M4, M5, M6> Multiplex7WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5, M6> expand(
+  public <K0, M0, M1, M2, M3, M4, M5, M6> Multiplex7WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5, M6> join(
       final Multiplex7WithValue<I1, K0, M0, M1, M2, M3, M4, M5, M6> multiplex
   ) {
     return new Multiplex7WithoutValue<>(value -> value,
@@ -206,7 +206,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * @param <M0>      The type of the first object produced by the supplied multiplexer.
    * @return A multiplexer to which the lanes of the supplied multiplexer have been added.
    */
-  public <K0, M0> Multiplex1WithoutValue<I1, I1, M0> expand(
+  public <K0, M0> Multiplex1WithoutValue<I1, I1, M0> join(
       final Multiplex1WithoutValue<I1, K0, M0> multiplex
   ) {
     return new Multiplex1WithoutValue<>(
@@ -221,7 +221,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * @param <M1>      The type of the second object produced by the supplied multiplexer.
    * @return A multiplexer to which the lanes of the supplied multiplexer have been added.
    */
-  public <K0, M0, M1> Multiplex2WithoutValue<I1, I1, M0, M1> expand(
+  public <K0, M0, M1> Multiplex2WithoutValue<I1, I1, M0, M1> join(
       final Multiplex2WithoutValue<I1, K0, M0, M1> multiplex
   ) {
     return new Multiplex2WithoutValue<>(value -> value,
@@ -237,7 +237,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * @param <M2>      The type of the third object produced by the supplied multiplexer.
    * @return A multiplexer to which the lanes of the supplied multiplexer have been added.
    */
-  public <K0, M0, M1, M2> Multiplex3WithoutValue<I1, I1, M0, M1, M2> expand(
+  public <K0, M0, M1, M2> Multiplex3WithoutValue<I1, I1, M0, M1, M2> join(
       final Multiplex3WithoutValue<I1, K0, M0, M1, M2> multiplex
   ) {
     return new Multiplex3WithoutValue<>(value -> value,
@@ -255,7 +255,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * @param <M3>      The type of the fourth object produced by the supplied multiplexer.
    * @return A multiplexer to which the lanes of the supplied multiplexer have been added.
    */
-  public <K0, M0, M1, M2, M3> Multiplex4WithoutValue<I1, I1, M0, M1, M2, M3> expand(
+  public <K0, M0, M1, M2, M3> Multiplex4WithoutValue<I1, I1, M0, M1, M2, M3> join(
       final Multiplex4WithoutValue<I1, K0, M0, M1, M2, M3> multiplex
   ) {
     return new Multiplex4WithoutValue<>(value -> value,
@@ -275,7 +275,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * @param <M4>      The type of the fifth object produced by the supplied multiplexer.
    * @return A multiplexer to which the lanes of the supplied multiplexer have been added.
    */
-  public <K0, M0, M1, M2, M3, M4> Multiplex5WithoutValue<I1, I1, M0, M1, M2, M3, M4> expand(
+  public <K0, M0, M1, M2, M3, M4> Multiplex5WithoutValue<I1, I1, M0, M1, M2, M3, M4> join(
       final Multiplex5WithoutValue<I1, K0, M0, M1, M2, M3, M4> multiplex
   ) {
     return new Multiplex5WithoutValue<>(value -> value,
@@ -297,7 +297,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * @param <M5>      The type of the sixth object produced by the supplied multiplexer.
    * @return A multiplexer to which the lanes of the supplied multiplexer have been added.
    */
-  public <K0, M0, M1, M2, M3, M4, M5> Multiplex6WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5> expand(
+  public <K0, M0, M1, M2, M3, M4, M5> Multiplex6WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5> join(
       final Multiplex6WithoutValue<I1, K0, M0, M1, M2, M3, M4, M5> multiplex
   ) {
     return new Multiplex6WithoutValue<>(value -> value,
@@ -321,7 +321,7 @@ public final class Multiplex0WithoutValue<I0, I1> {
    * @param <M6>      The type of the seventh object produced by the supplied multiplexer.
    * @return A multiplexer to which the lanes of the supplied multiplexer have been added.
    */
-  public <K0, M0, M1, M2, M3, M4, M5, M6> Multiplex7WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5, M6> expand(
+  public <K0, M0, M1, M2, M3, M4, M5, M6> Multiplex7WithoutValue<I1, I1, M0, M1, M2, M3, M4, M5, M6> join(
       final Multiplex7WithoutValue<I1, K0, M0, M1, M2, M3, M4, M5, M6> multiplex
   ) {
     return new Multiplex7WithoutValue<>(value -> value,

@@ -8,16 +8,16 @@ import io.reactivex.functions.Function;
  * This class represents a builder of an object which can destructure functions into a composition
  * of multiplexers and demultiplexers. More technically, given a
  * {@link Function Function&lt;A, B&gt;}, this class produces objects which provide three methods,
- * <code>add</code>, <code>expand</code>, and <code>demux</code>, where <code>add</code> has the following forms:
+ * <code>add</code>, <code>join</code>, and <code>demux</code>, where <code>add</code> has the following forms:
  * </p>
  * <ul>
  * <li><code>&lt;C&gt; add(Function&lt;A, C&gt;)</code> expands the multiplexer by another lane which multiplexes an object of type <code>C</code>,</li>
  * </ul>
  * <p>
- * <code>expand</code> has the following form:
+ * <code>join</code> has the following form:
  * </p>
  * <ul>
- * <li><code>expand(Multiplexer&lt;T0, T1, ..., Tn&gt;)</code> expand the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type <code>T1, T2, ..., Tn</code>).</li>
+ * <li><code>join(Multiplexer&lt;T0, T1, ..., Tn&gt;)</code> expand the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type <code>T1, T2, ..., Tn</code>).</li>
  * </ul>
  * <p>
  * The return type of <code>add</code> and <code>expand</code>is another multiplexer so that methods can be chained.

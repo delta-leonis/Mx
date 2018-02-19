@@ -12,9 +12,9 @@ where `add` has the following form:
 
   * `<C> add(Function<A, C>)` expands the multiplexer by another lane which multiplexes an object of type `C`,
   
-`expand` has the following form: 
+`join` has the following form: 
 
-  * `expand(Multiplexer<T0, T1, ..., Tn>)` expand the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type `T1, T2, ..., Tn`).
+  * `join(Multiplexer<T0, T1, ..., Tn>)` expands the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type `T1, T2, ..., Tn`).
 
 The return type of `add` and `expand` is another multiplexer so that methods can be chained.  
 
