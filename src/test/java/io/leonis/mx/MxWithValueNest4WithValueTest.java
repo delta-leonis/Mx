@@ -2,7 +2,7 @@ package io.leonis.mx;
 
 import org.junit.*;
 
-public class MxNest4WithValueTest {
+public class MxWithValueNest4WithValueTest {
 
   @Test
   public void nest4mux3WithValue() throws Exception {

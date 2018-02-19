@@ -2,7 +2,7 @@ package io.leonis.mx;
 
 import org.junit.*;
 
-public class MxNest3WithoutValueTest {
+public class MxWithValueNest3WithoutValueTest {
   @Test
   public void nest3mux4WithoutValue() throws Exception {
     Assert.assertEquals(
