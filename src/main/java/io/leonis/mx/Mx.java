@@ -12,9 +12,11 @@ import io.reactivex.functions.Function;
  * </p>
  * <ul>
  * <li><code>&lt;C&gt; add(Function&lt;A, C&gt;)</code> expands the multiplexer by another lane which multiplexes an object of type <code>C</code>,</li>
+ * </ul>
  * <p>
  * <code>expand</code> has the following form:
  * </p>
+ * <ul>
  * <li><code>expand(Multiplexer&lt;T0, T1, ..., Tn&gt;)</code> expand the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type <code>T1, T2, ..., Tn</code>).</li>
  * </ul>
  * <p>
