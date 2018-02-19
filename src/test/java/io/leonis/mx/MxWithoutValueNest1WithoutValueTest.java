@@ -2,11 +2,11 @@ package io.leonis.mx;
 
 import org.junit.*;
 
-public class MxNestWithoutValueTest {
+public class MxWithoutValueNest1WithoutValueTest {
   @Test
   public void nest1mux6WithoutValue() throws Exception {
     Assert.assertEquals(
-        Mx.mux("#")
+        Mx.<String>mux()
             .join(Mx.<String>mux()
                 .add(marker -> marker + "1"))
             .add(marker -> marker + "2")
@@ -15,14 +15,15 @@ public class MxNestWithoutValueTest {
             .add(marker -> marker + "5")
             .add(marker -> marker + "6")
             .add(marker -> marker + "7")
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 
   @Test
   public void mux1nest1mux5WithoutValue() throws Exception {
     Assert.assertEquals(
-        Mx.mux("#")
+        Mx.<String>mux()
             .add(marker -> marker + "1")
             .join(Mx.<String>mux()
                 .add(marker -> marker + "2"))
@@ -31,14 +32,15 @@ public class MxNestWithoutValueTest {
             .add(marker -> marker + "5")
             .add(marker -> marker + "6")
             .add(marker -> marker + "7")
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 
   @Test
   public void mux2nest1mux4WithoutValue() throws Exception {
     Assert.assertEquals(
-        Mx.mux("#")
+        Mx.<String>mux()
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
             .join(Mx.<String>mux()
@@ -47,14 +49,15 @@ public class MxNestWithoutValueTest {
             .add(marker -> marker + "5")
             .add(marker -> marker + "6")
             .add(marker -> marker + "7")
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 
   @Test
   public void mux3nest1mux3WithoutValue() throws Exception {
     Assert.assertEquals(
-        Mx.mux("#")
+        Mx.<String>mux()
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
@@ -63,14 +66,15 @@ public class MxNestWithoutValueTest {
             .add(marker -> marker + "5")
             .add(marker -> marker + "6")
             .add(marker -> marker + "7")
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 
   @Test
   public void mux4nest1mux2WithoutValue() throws Exception {
     Assert.assertEquals(
-        Mx.mux("#")
+        Mx.<String>mux()
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
@@ -79,14 +83,15 @@ public class MxNestWithoutValueTest {
                 .add(marker -> marker + "5"))
             .add(marker -> marker + "6")
             .add(marker -> marker + "7")
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 
   @Test
   public void mux5nest1mux1WithoutValue() throws Exception {
     Assert.assertEquals(
-        Mx.mux("#")
+        Mx.<String>mux()
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
@@ -95,14 +100,15 @@ public class MxNestWithoutValueTest {
             .join(Mx.<String>mux()
                 .add(marker -> marker + "6"))
             .add(marker -> marker + "7")
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 
   @Test
   public void mux6nest1WithoutValue() throws Exception {
     Assert.assertEquals(
-        Mx.mux("#")
+        Mx.<String>mux()
             .add(marker -> marker + "1")
             .add(marker -> marker + "2")
             .add(marker -> marker + "3")
@@ -111,7 +117,8 @@ public class MxNestWithoutValueTest {
             .add(marker -> marker + "6")
             .join(Mx.<String>mux()
                 .add(marker -> marker + "7"))
-            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g),
+            .demux((a, b, c, d, e, f, g) -> a + b + c + d + e + f + g)
+            .apply("#"),
         "#1#2#3#4#5#6#7");
   }
 }

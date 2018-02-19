@@ -1,6 +1,7 @@
 package io.leonis.mx;
 
 import io.reactivex.functions.Function;
+import lombok.experimental.UtilityClass;
 
 /**
  * The Class Mx.
@@ -30,12 +31,8 @@ import io.reactivex.functions.Function;
  *
  * @author Rimon Oz
  */
+@UtilityClass
 public final class Mx {
-
-  /**
-   * Private constructor to hide the implicit public one.
-   */
-  private Mx() { }
 
   /**
    * @param value The value to prime the multiplexer with.
