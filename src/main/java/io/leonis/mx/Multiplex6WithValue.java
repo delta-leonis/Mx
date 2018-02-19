@@ -47,11 +47,11 @@ public final class Multiplex6WithValue<I0, I1, N0, N1, N2, N3, N4, N5> {
   }
 
   /**
-   * @param multiplex A function, representing a lane, to expand the multiplexer with.
+   * @param multiplex A function, representing a lane, to add to the multiplexer.
    * @param <M0>      The type of object produced by the new lane.
    * @return A multiplexer to which the supplied lane has been added.
    */
-  public <M0> Multiplex7WithValue<I0, I1, N0, N1, N2, N3, N4, N5, M0> expand(
+  public <M0> Multiplex7WithValue<I0, I1, N0, N1, N2, N3, N4, N5, M0> add(
       final Function<I1, M0> multiplex
   ) {
     return new Multiplex7WithValue<>(this.value, this.preComp,
@@ -67,7 +67,7 @@ public final class Multiplex6WithValue<I0, I1, N0, N1, N2, N3, N4, N5> {
    * @return A primed multiplexer to which the lanes of the supplied multiplexer have been added.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
-  public <K0, M0> Multiplex7WithValue<I1, I1, N0, N1, N2, N3, N4, N5, M0> expand(
+  public <K0, M0> Multiplex7WithValue<I1, I1, N0, N1, N2, N3, N4, N5, M0> join(
       final Multiplex1WithoutValue<I1, K0, M0> multiplex
   ) throws Exception {
     return new Multiplex7WithValue<>(this.preComp.apply(value), value -> value,
@@ -88,7 +88,7 @@ public final class Multiplex6WithValue<I0, I1, N0, N1, N2, N3, N4, N5> {
    * These lanes ignore outer input and operate on the value with which that multiplexer was primed.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
-  public <K0, M0> Multiplex7WithValue<I1, I1, N0, N1, N2, N3, N4, N5, M0> expand(
+  public <K0, M0> Multiplex7WithValue<I1, I1, N0, N1, N2, N3, N4, N5, M0> join(
       final Multiplex1WithValue<I1, K0, M0> multiplex
   ) throws Exception {
     return new Multiplex7WithValue<>(this.preComp.apply(value), value -> value,

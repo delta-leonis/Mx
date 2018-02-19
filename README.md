@@ -7,20 +7,40 @@
 
 `Mx` is a framework for declarative object manipulation. `Mx` does this by exposing an
 API with which to destructure functions into a composition of multiplexers and demultiplexers.
-More technically, given a `Function<A, B>`, `Mx` provides two methods, `expand` and `demux`,
-where `expand` has the following forms:
+More technically, given a `Function<A, B>`, `Mx` provides three methods, `add`, `join` and `demux`,
+where `add` has the following form:
 
-  * `<C> expand(Function<A, C>)` expands the multiplexer by another lane which multiplexes an object of type `C`,
-  * `expand(Multiplexer<T0, T1, ..., Tn>)` expand the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type `T1, T2, ..., Tn`).
+  * `<C> add(Function<A, C>)` adds another lane to the multiplexer which produces an object of type `C`,
+  
+`join` has the following form: 
 
-The return type of `expand` is another multiplexer so that methods can be chained.  
+  * `join(Multiplexer<T0, T1, ..., Tn>)` adds all the lanes from the supplied multiplexer (which multiplex objects of type `T1, T2, ..., Tn`) to the multiplexer.
 
+The return type of `add` and `join` is another multiplexer so that methods can be chained.  
 
 `demux` has the following forms:
 
-  * `<O> demux(Function<T1, T2, ... Tn, O>)` demultiplexes all the functions in the multiplexer using the supplied combinator.
-  * `<O> demux(I, Function<T1, T2, ... Tn, O>)` demultiplexes all the functions in the multiplexer and applies the result to the supplied input.
+  * `<O> demux(Function<T1, T2, ... Tn, O>)` demultiplexes all the functions in the multiplexer using the supplied combinator. The result of this operation is a function.
+  * `<O> demux(I, Function<T1, T2, ... Tn, O>)` demultiplexes all the functions in the multiplexer and applies the result to the supplied input. The result of this operation is an object.
   
+## Dependency
+
+#### Maven
+
+```
+<dependency>
+    <groupId>io.leonis</groupId>
+    <artifactId>Mx</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
+#### Gradle
+
+```
+compile 'io.leonis:Mx:0.0.1'
+```
+
 ## Examples
 
 Suppose we had the following deeply nested object structure (using lombok for brevity):
@@ -83,53 +103,33 @@ This could be implemented using `Mx` as follows:
 
 Mx.mux(inputSchool)
   // the name of the school
-  .expand(School::getName)
-  .expand(
+  .add(School::getName)
+  .join(
       Mx.first(School::getClasses)
         // the best student in the best class
-        .expand(
+        .join(
             Mx.first(SchoolMetrics::findBestClass)
                 // the name of the best class
-                .expand(SchoolClass::getName)
-                .expand(
+                .add(SchoolClass::getName)
+                .join(
                     Mx.first(SchoolMetrics::findBestStudent)
                         // the name of the best student in the best class
-                        .expand(Student::getName)
+                        .add(Student::getName)
                         // the GPA of the best student in the best class
-                        .expand(Student::getGPA)))
+                        .add(Student::getGPA)))
         // the worst student in the worst class
-        .expand(
+        .join(
             Mx.first(SchoolMetrics::findWorstClass)
                 // the name of the worst class
-                .expand(SchoolClass::getName)
-                .expand(
+                .add(SchoolClass::getName)
+                .join(
                     Mx.first(SchoolMetrics::findWorstStudent)
                         // the name of the worst student in the worst class
-                        .expand(Student::getName)
+                        .add(Student::getName)
                         // the GPA of the worst student in the worst class
-                        .expand(Student::getGPA)))
+                        .add(Student::getGPA)))
   .demux(SchoolReport::new);
 ``` 
-
-## Dependency
-
-#### Maven
-
-```
-<dependency>
-    <groupId>io.leonis</groupId>
-    <artifactId>Mx</artifactId>
-    <version>0.0.1</version>
-</dependency>
-```
-
-#### Gradle
-
-```
-compile 'io.leonis:Mx:0.0.1'
-```
-
-## Overview
 
 ## Documentation
 
@@ -141,6 +141,20 @@ Make sure you have `gradle>=v2.10` installed. Run the following to build the app
 
 ```
   gradle build
+```
+
+## Tests
+
+Make sure you have `gradle>=v2.10` installed. Run the following to execute the test suite:
+
+```
+  gradle test
+```
+
+Run the following to generate coverage reports (test reports can be found in `build/reports`):
+
+```
+  gradle jacocoTestReport
 ```
 
 ## Copyright
