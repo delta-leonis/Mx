@@ -1,3 +1,5 @@
+import io.franzbecker.gradle.lombok.task.DelombokTask
+
 plugins {
     id 'io.franzbecker.gradle-lombok' version '1.11'
     id 'java'
@@ -17,8 +19,21 @@ repositories {
     mavenCentral()
 }
 
+task delombok(type: DelombokTask) {
+    description = 'Generates delomboked source.'
+
+    sourceSets.all {
+        if ( it.name != SourceSet.TEST_SOURCE_SET_NAME ) {
+            it.allJava.srcDirs.each {
+                args( it, '-d', "${buildDir}/${delombok.name}" )
+            }
+        }
+    }
+}
+
 javadoc {
-    source = sourceSets.main.allJava
+    dependsOn delombok
+    source = file( "${buildDir}/${delombok.name}" )
     classpath = configurations.compile
 }
 
