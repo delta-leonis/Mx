@@ -7,16 +7,16 @@
 
 `Mx` is a framework for declarative object manipulation. `Mx` does this by exposing an
 API with which to destructure functions into a composition of multiplexers and demultiplexers.
-More technically, given a `Function<A, B>`, `Mx` provides three methods, `add`, `expand` and `demux`,
+More technically, given a `Function<A, B>`, `Mx` provides three methods, `add`, `join` and `demux`,
 where `add` has the following form:
 
-  * `<C> add(Function<A, C>)` expands the multiplexer by another lane which multiplexes an object of type `C`,
+  * `<C> add(Function<A, C>)` adds another lane to the multiplexer which produces an object of type `C`,
   
 `join` has the following form: 
 
-  * `join(Multiplexer<T0, T1, ..., Tn>)` expands the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type `T1, T2, ..., Tn`).
+  * `join(Multiplexer<T0, T1, ..., Tn>)` adds all the lanes from the supplied multiplexer (which multiplex objects of type `T1, T2, ..., Tn`) to the multiplexer.
 
-The return type of `add` and `expand` is another multiplexer so that methods can be chained.  
+The return type of `add` and `join` is another multiplexer so that methods can be chained.  
 
 `demux` has the following forms:
 
@@ -104,25 +104,25 @@ This could be implemented using `Mx` as follows:
 Mx.mux(inputSchool)
   // the name of the school
   .add(School::getName)
-  .expand(
+  .join(
       Mx.first(School::getClasses)
         // the best student in the best class
-        .expand(
+        .join(
             Mx.first(SchoolMetrics::findBestClass)
                 // the name of the best class
                 .add(SchoolClass::getName)
-                .expand(
+                .join(
                     Mx.first(SchoolMetrics::findBestStudent)
                         // the name of the best student in the best class
                         .add(Student::getName)
                         // the GPA of the best student in the best class
                         .add(Student::getGPA)))
         // the worst student in the worst class
-        .expand(
+        .join(
             Mx.first(SchoolMetrics::findWorstClass)
                 // the name of the worst class
                 .add(SchoolClass::getName)
-                .expand(
+                .join(
                     Mx.first(SchoolMetrics::findWorstStudent)
                         // the name of the worst student in the worst class
                         .add(Student::getName)

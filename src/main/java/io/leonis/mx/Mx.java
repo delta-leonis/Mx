@@ -11,13 +11,13 @@ import io.reactivex.functions.Function;
  * <code>add</code>, <code>join</code>, and <code>demux</code>, where <code>add</code> has the following forms:
  * </p>
  * <ul>
- * <li><code>&lt;C&gt; add(Function&lt;A, C&gt;)</code> expands the multiplexer by another lane which multiplexes an object of type <code>C</code>,</li>
+ * <li><code>&lt;C&gt; add(Function&lt;A, C&gt;)</code>adds another lane to the multiplexer which produces an object of type <code>C</code>,</li>
  * </ul>
  * <p>
  * <code>join</code> has the following form:
  * </p>
  * <ul>
- * <li><code>join(Multiplexer&lt;T0, T1, ..., Tn&gt;)</code> expand the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type <code>T1, T2, ..., Tn</code>).</li>
+ * <li><code>join(Multiplexer&lt;T0, T1, ..., Tn&gt;)</code> adds all the lanes from the supplied multiplexer (which multiplex objects of type  <code>T1, T2, ..., Tn</code>) to the multiplexer.</li>
  * </ul>
  * <p>
  * The return type of <code>add</code> and <code>expand</code>is another multiplexer so that methods can be chained.

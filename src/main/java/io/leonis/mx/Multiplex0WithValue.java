@@ -18,7 +18,7 @@ public final class Multiplex0WithValue<I0, I1> {
   private final Function<I0, I1> preComp;
 
   /**
-   * @param multiplex A function, representing a lane, to expand the multiplexer with.
+   * @param multiplex A function, representing a lane, to add to the multiplexer.
    * @param <M0>      The type of object produced by the new lane.
    * @return A primed multiplexer to which the supplied lane has been added.
    * @throws Exception Thrown by the precomposition function when normalization fails.
