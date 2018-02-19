@@ -94,6 +94,4 @@ public class MxWithoutValue {
             .apply("#"),
         "#1");
   }
-
-
 }
