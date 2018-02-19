@@ -23,7 +23,7 @@ public final class Multiplex0WithValue<I0, I1> {
    * @return A primed multiplexer to which the supplied lane has been added.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
-  public <M0> Multiplex1WithValue<I1, I1, M0> expand(
+  public <M0> Multiplex1WithValue<I1, I1, M0> add(
       final Function<I1, M0> multiplex
   ) throws Exception {
     return new Multiplex1WithValue<>(this.preComp.apply(this.value), value -> value, multiplex);

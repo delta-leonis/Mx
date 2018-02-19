@@ -7,16 +7,19 @@ import io.reactivex.functions.Function;
  * <p>
  * This class represents a builder of an object which can destructure functions into a composition
  * of multiplexers and demultiplexers. More technically, given a
- * {@link Function Function&lt;A, B&gt;}, this class produces objects which provide two methods,
- * <code>expand</code> and <code>demux</code>,where <code>expand</code> has the following forms:
+ * {@link Function Function&lt;A, B&gt;}, this class produces objects which provide three methods,
+ * <code>add</code>, <code>expand</code>, and <code>demux</code>, where <code>add</code> has the following forms:
  * </p>
  * <ul>
- * <li><code>&lt;C&gt; expand(Function&lt;A, C&gt;)</code> expands the multiplexer by another lane which multiplexes an object of type <code>C</code>,</li>
+ * <li><code>&lt;C&gt; add(Function&lt;A, C&gt;)</code> expands the multiplexer by another lane which multiplexes an object of type <code>C</code>,</li>
+ * <p>
+ * <code>expand</code> has the following form:
+ * </p>
  * <li><code>expand(Multiplexer&lt;T0, T1, ..., Tn&gt;)</code> expand the multiplexer by adding the lanes from the supplied multiplexer (which multiplex objects of type <code>T1, T2, ..., Tn</code>).</li>
  * </ul>
  * <p>
- * The return type of `expand` is another multiplexer so that methods can be chained.
- * `demux` has the following forms:
+ * The return type of <code>add</code> and <code>expand</code>is another multiplexer so that methods can be chained.
+ * <code>demux</code> has the following forms:
  * </p>
  * <ul>
  * <li><code>&lt;O&gt; demux(Function&lt;T1, T2, ... Tn, O&gt;)</code> demultiplexes all the functions in the multiplexer using the supplied combinator.</li>
@@ -26,6 +29,12 @@ import io.reactivex.functions.Function;
  * @author Rimon Oz
  */
 public final class Mx {
+
+  /**
+   * Private constructor to hide the implicit public one.
+   */
+  private Mx() { }
+
   /**
    * @param value The value to prime the multiplexer with.
    * @param preComp The precomposition function to apply to any expansions to the multiplexer.

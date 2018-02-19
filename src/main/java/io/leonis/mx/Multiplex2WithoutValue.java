@@ -51,7 +51,7 @@ public final class Multiplex2WithoutValue<I0, I1, N0, N1> {
    * @param <M0>      The type of object produced by the new lane.
    * @return A multiplexer to which the supplied lane has been added.
    */
-  public <M0> Multiplex3WithoutValue<I0, I1, N0, N1, M0> expand(final Function<I1, M0> multiplex) {
+  public <M0> Multiplex3WithoutValue<I0, I1, N0, N1, M0> add(final Function<I1, M0> multiplex) {
     return new Multiplex3WithoutValue<>(this.preComp, this.firstMux, this.secondMux, multiplex);
   }
 
