@@ -56,7 +56,7 @@ public class SchoolMetrics {
   
   public static Student findBestStudent(final Set<Student> students) { /* ... */ }
   
-  public static StudentfindWorstStudent(final Set<Student> students) { /* ... */ }
+  public static Student findWorstStudent(final Set<Student> students) { /* ... */ }
 }
 ```
 
