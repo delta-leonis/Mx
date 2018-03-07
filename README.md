@@ -31,14 +31,14 @@ The return type of `add` and `join` is another multiplexer so that methods can b
 <dependency>
     <groupId>io.leonis</groupId>
     <artifactId>Mx</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 </dependency>
 ```
 
 #### Gradle
 
 ```
-compile 'io.leonis:Mx:0.0.1'
+compile 'io.leonis:Mx:0.0.2'
 ```
 
 ## Examples

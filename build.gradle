@@ -9,7 +9,7 @@ plugins {
 }
 
 group 'io.leonis'
-version '0.0.1'
+version '0.0.2'
 archivesBaseName = 'Mx'
 rootProject.description = 'declarative object manipulation'
 sourceCompatibility = 1.8
