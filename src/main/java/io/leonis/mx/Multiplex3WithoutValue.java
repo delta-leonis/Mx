@@ -1,6 +1,7 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.*;
+import io.reactivex.functions.Function3;
+import java.util.function.Function;
 import lombok.*;
 
 /**
@@ -11,7 +12,6 @@ import lombok.*;
  * @param <N0> The type of the first object produced by the first lane of this multiplexer.
  * @param <N1> The type of the second object produced by the first lane of this multiplexer.
  * @param <N2> The type of the third object produced by the first lane of this multiplexer.
- *
  * @author Rimon Oz
  */
 @AllArgsConstructor
@@ -23,28 +23,25 @@ public final class Multiplex3WithoutValue<I0, I1, N0, N1, N2> {
   private final Function<I1, N2> thirdMux;
 
   /**
+   * @param demux The combinator function.
+   * @param <O>   The type of output object.
+   * @return A {@link Function} representing the
+   * composition of multiplexers, demuxed by the supplied combinator function.
+   */
+  public <O> io.reactivex.functions.Function<I0, O> demux(final Function3<N0, N1, N2, O> demux) {
+    return value -> this.demux(value, demux);
+  }
+
+  /**
    * @param value The value to operate on.
    * @param demux The combinator function.
-   * @param <O> The type of output object.
+   * @param <O>   The type of output object.
    * @return The result of passing the supplied value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
   public <O> O demux(final I0 value, final Function3<N0, N1, N2, O> demux) throws Exception {
     return demux.apply(
-        this.firstMux.apply(this.preComp.apply(value)),
-        this.secondMux.apply(this.preComp.apply(value)),
-        this.thirdMux.apply(this.preComp.apply(value)));
-  }
-
-  /**
-   * @param demux The combinator function.
-   * @param <O> The type of output object.
-   * @return A {@link Function} representing the
-   * composition of multiplexers, demuxed by the supplied combinator function.
-   */
-  public <O> Function<I0, O> demux(final Function3<N0, N1, N2, O> demux) {
-    return value -> demux.apply(
         this.firstMux.apply(this.preComp.apply(value)),
         this.secondMux.apply(this.preComp.apply(value)),
         this.thirdMux.apply(this.preComp.apply(value)));

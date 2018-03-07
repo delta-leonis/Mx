@@ -1,6 +1,6 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.Function;
+import java.util.function.Function;
 import lombok.experimental.UtilityClass;
 
 /**

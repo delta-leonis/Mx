@@ -4,7 +4,7 @@ import org.junit.*;
 
 public class MxFirst {
   @Test
-  public void muxFirst() throws Exception {
+  public void muxFirst() {
     Assert.assertEquals(
         Mx.muxFirst("#", hashbang -> hashbang + "#")
             .add(marker -> marker + "1")
@@ -13,7 +13,7 @@ public class MxFirst {
   }
 
   @Test
-  public void first() throws Exception {
+  public void first() {
     Assert.assertEquals(
         Mx.first(hashbang -> hashbang + "#")
             .add(marker -> marker + "1")

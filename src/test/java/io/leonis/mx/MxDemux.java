@@ -4,7 +4,7 @@ import org.junit.*;
 
 public class MxDemux {
   @Test
-  public void mux1demux() throws Exception {
+  public void mux1demux() {
     Assert.assertEquals(
         Mx.mux()
             .add(marker -> marker + "1")
