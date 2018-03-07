@@ -1,6 +1,7 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.*;
+import io.reactivex.functions.Function7;
+import java.util.function.Function;
 import lombok.*;
 
 /**
@@ -15,7 +16,6 @@ import lombok.*;
  * @param <N4> The type of the fifth object produced by the first lane of this multiplexer.
  * @param <N5> The type of the sixth object produced by the first lane of this multiplexer.
  * @param <N6> The type of the seventh object produced by the first lane of this multiplexer.
- *
  * @author Rimon Oz
  */
 @AllArgsConstructor
@@ -31,33 +31,30 @@ public final class Multiplex7WithoutValue<I0, I1, N0, N1, N2, N3, N4, N5, N6> {
   private final Function<I1, N6> seventhMux;
 
   /**
+   * @param demux The combinator function.
+   * @param <O>   The type of output object.
+   * @return A {@link Function} representing the
+   * composition of multiplexers, demuxed by the supplied combinator function.
+   */
+  public <O> io.reactivex.functions.Function<I0, O> demux(
+      final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux
+  ) {
+    return value -> this.demux(value, demux);
+  }
+
+  /**
    * @param value The value to operate on.
    * @param demux The combinator function.
-   * @param <O> The type of output object.
+   * @param <O>   The type of output object.
    * @return The result of passing the supplied value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
-  public <O> O demux(final I0 value,
-      final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux) throws Exception {
+  public <O> O demux(
+      final I0 value,
+      final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux
+  ) throws Exception {
     return demux.apply(
-        this.firstMux.apply(this.preComp.apply(value)),
-        this.secondMux.apply(this.preComp.apply(value)),
-        this.thirdMux.apply(this.preComp.apply(value)),
-        this.fourthMux.apply(this.preComp.apply(value)),
-        this.fifthMux.apply(this.preComp.apply(value)),
-        this.sixthMux.apply(this.preComp.apply(value)),
-        this.seventhMux.apply(this.preComp.apply(value)));
-  }
-
-  /**
-   * @param demux The combinator function.
-   * @param <O> The type of output object.
-   * @return A {@link Function} representing the
-   * composition of multiplexers, demuxed by the supplied combinator function.
-   */
-  public <O> Function<I0, O> demux(final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux) {
-    return value -> demux.apply(
         this.firstMux.apply(this.preComp.apply(value)),
         this.secondMux.apply(this.preComp.apply(value)),
         this.thirdMux.apply(this.preComp.apply(value)),

@@ -1,6 +1,6 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.Function;
+import java.util.function.Function;
 import lombok.*;
 
 /**
@@ -9,7 +9,6 @@ import lombok.*;
  * @param <I0> The type of (external) input to the multiplexer.
  * @param <I1> The type of internal input, or the type used as input to any expansions to the multiplexer.
  * @param <N0> The type of object produced by the first lane of this multiplexer.
- *
  * @author Rimon Oz
  */
 @AllArgsConstructor
@@ -22,9 +21,8 @@ public final class Multiplex1WithoutValue<I0, I1, N0> {
    * @param value The value to operate on.
    * @return The result of passing the supplied value to the {@link Function} representing the
    * composition of multiplexers and demultiplexers.
-   * @throws Exception Thrown by the precomposition function when normalization fails.
    */
-  public N0 demux(final I0 value) throws Exception {
+  public N0 demux(final I0 value) {
     return this.mux.apply(this.preComp.apply(value));
   }
 

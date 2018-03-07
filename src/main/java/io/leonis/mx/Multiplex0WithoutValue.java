@@ -1,6 +1,6 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.Function;
+import java.util.function.Function;
 import lombok.*;
 
 /**
@@ -8,7 +8,6 @@ import lombok.*;
  *
  * @param <I0> The type of (external) input to the multiplexer.
  * @param <I1> The type of internal input, or the type used as input to any expansions to the multiplexer.
- *
  * @author Rimon Oz
  */
 @AllArgsConstructor

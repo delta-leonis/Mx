@@ -1,6 +1,7 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.*;
+import io.reactivex.functions.Function4;
+import java.util.function.Function;
 import lombok.*;
 
 /**
@@ -12,7 +13,6 @@ import lombok.*;
  * @param <N1> The type of the second object produced by the first lane of this multiplexer.
  * @param <N2> The type of the third object produced by the first lane of this multiplexer.
  * @param <N3> The type of the fourth object produced by the first lane of this multiplexer.
- *
  * @author Rimon Oz
  */
 @AllArgsConstructor
@@ -25,30 +25,29 @@ public final class Multiplex4WithoutValue<I0, I1, N0, N1, N2, N3> {
   private final Function<I1, N3> fourthMux;
 
   /**
+   * @param demux The combinator function.
+   * @param <O>   The type of output object.
+   * @return A {@link Function} representing the
+   * composition of multiplexers, demuxed by the supplied combinator function.
+   */
+  public <O> io.reactivex.functions.Function<I1, O> demux(
+      final Function4<N0, N1, N2, N3, O> demux) {
+    return value -> this.demux(value, demux);
+  }
+
+  /**
    * @param value The value to operate on.
    * @param demux The combinator function.
-   * @param <O> The type of output object.
+   * @param <O>   The type of output object.
    * @return The result of passing the supplied value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
-  public <O> O demux(final I1 value, final Function4<N0, N1, N2, N3, O> demux)
-      throws Exception {
+  public <O> O demux(
+      final I1 value,
+      final Function4<N0, N1, N2, N3, O> demux
+  ) throws Exception {
     return demux.apply(
-        this.firstMux.apply(value),
-        this.secondMux.apply(value),
-        this.thirdMux.apply(value),
-        this.fourthMux.apply(value));
-  }
-
-  /**
-   * @param demux The combinator function.
-   * @param <O> The type of output object.
-   * @return A {@link Function} representing the
-   * composition of multiplexers, demuxed by the supplied combinator function.
-   */
-  public <O> Function<I1, O> demux(final Function4<N0, N1, N2, N3, O> demux) {
-    return value -> demux.apply(
         this.firstMux.apply(value),
         this.secondMux.apply(value),
         this.thirdMux.apply(value),
@@ -103,7 +102,8 @@ public final class Multiplex4WithoutValue<I0, I1, N0, N1, N2, N3> {
         this.thirdMux,
         this.fourthMux,
         value -> multiplex.getFirstMux().apply(multiplex.getPreComp().apply(multiplex.getValue())),
-        value -> multiplex.getSecondMux().apply(multiplex.getPreComp().apply(multiplex.getValue())));
+        value -> multiplex.getSecondMux()
+            .apply(multiplex.getPreComp().apply(multiplex.getValue())));
   }
 
   /**

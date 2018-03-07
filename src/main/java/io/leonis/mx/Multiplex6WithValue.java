@@ -1,6 +1,7 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.*;
+import io.reactivex.functions.Function6;
+import java.util.function.Function;
 import lombok.*;
 
 /**
@@ -14,7 +15,6 @@ import lombok.*;
  * @param <N3> The type of the fourth object produced by the first lane of this multiplexer.
  * @param <N4> The type of the fifth object produced by the first lane of this multiplexer.
  * @param <N5> The type of the sixth object produced by the first lane of this multiplexer.
- *
  * @author Rimon Oz
  */
 @AllArgsConstructor
@@ -31,7 +31,7 @@ public final class Multiplex6WithValue<I0, I1, N0, N1, N2, N3, N4, N5> {
 
   /**
    * @param demux The combinator function.
-   * @param <O> The type of output object.
+   * @param <O>   The type of output object.
    * @return The result of passing the contained value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
@@ -65,11 +65,10 @@ public final class Multiplex6WithValue<I0, I1, N0, N1, N2, N3, N4, N5> {
    * @param <K0>      The type of internal input to the supplied multiplexer.
    * @param <M0>      The type of the object produced by the supplied multiplexer.
    * @return A primed multiplexer to which the lanes of the supplied multiplexer have been added.
-   * @throws Exception Thrown by the precomposition function when normalization fails.
    */
   public <K0, M0> Multiplex7WithValue<I1, I1, N0, N1, N2, N3, N4, N5, M0> join(
       final Multiplex1WithoutValue<I1, K0, M0> multiplex
-  ) throws Exception {
+  ) {
     return new Multiplex7WithValue<>(this.preComp.apply(value), value -> value,
         this.firstMux,
         this.secondMux,
@@ -86,11 +85,10 @@ public final class Multiplex6WithValue<I0, I1, N0, N1, N2, N3, N4, N5> {
    * @param <M0>      The type of the object produced by the supplied multiplexer.
    * @return A primed multiplexer to which the lanes of the supplied multiplexer have been added.
    * These lanes ignore outer input and operate on the value with which that multiplexer was primed.
-   * @throws Exception Thrown by the precomposition function when normalization fails.
    */
   public <K0, M0> Multiplex7WithValue<I1, I1, N0, N1, N2, N3, N4, N5, M0> join(
       final Multiplex1WithValue<I1, K0, M0> multiplex
-  ) throws Exception {
+  ) {
     return new Multiplex7WithValue<>(this.preComp.apply(value), value -> value,
         this.firstMux,
         this.secondMux,

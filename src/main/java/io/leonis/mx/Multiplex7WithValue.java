@@ -1,6 +1,7 @@
 package io.leonis.mx;
 
-import io.reactivex.functions.*;
+import io.reactivex.functions.Function7;
+import java.util.function.Function;
 import lombok.*;
 
 /**
@@ -15,7 +16,6 @@ import lombok.*;
  * @param <N4> The type of the fifth object produced by the first lane of this multiplexer.
  * @param <N5> The type of the sixth object produced by the first lane of this multiplexer.
  * @param <N6> The type of the seventh object produced by the first lane of this multiplexer.
- *
  * @author Rimon Oz
  */
 @AllArgsConstructor
@@ -33,13 +33,12 @@ public final class Multiplex7WithValue<I0, I1, N0, N1, N2, N3, N4, N5, N6> {
 
   /**
    * @param demux The combinator function.
-   * @param <O> The type of output object.
+   * @param <O>   The type of output object.
    * @return The result of passing the contained value to the {@link Function} representing the
    * composition of multiplexers, demuxed by the supplied combinator function.
    * @throws Exception Thrown by the precomposition function when normalization fails.
    */
-  public <O> O demux(final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux)
-      throws Exception {
+  public <O> O demux(final Function7<N0, N1, N2, N3, N4, N5, N6, O> demux) throws Exception {
     return demux.apply(
         this.firstMux.apply(this.preComp.apply(this.value)),
         this.secondMux.apply(this.preComp.apply(this.value)),
