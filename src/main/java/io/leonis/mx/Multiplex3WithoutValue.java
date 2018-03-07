@@ -51,6 +51,24 @@ public final class Multiplex3WithoutValue<I0, I1, N0, N1, N2> {
   }
 
   /**
+   * @param fold A function, representing a lane, which combines the values produced by the other
+   *             lanes in the multiplexer.
+   * @param <M0> The type of object produced by the new lane.
+   * @return A multiplexer to which a lane has been added which combines the values produced by the
+   * other lanes in the multiplexer.
+   */
+  public <M0> Multiplex4WithoutValue<I0, I1, N0, N1, N2, M0> foldAdd(
+      final Function3<N0, N1, N2, M0> fold
+  ) {
+    return new Multiplex4WithoutValue<>(this.preComp,
+        this.firstMux, this.secondMux, this.thirdMux,
+        value -> fold.apply(
+            this.firstMux.apply(value),
+            this.secondMux.apply(value),
+            this.thirdMux.apply(value)));
+  }
+
+  /**
    * @param multiplex A function, representing a lane, to add to the multiplexer.
    * @param <M0>      The type of object produced by the new lane.
    * @return A multiplexer to which the supplied lane has been added.
